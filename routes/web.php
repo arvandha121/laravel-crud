@@ -23,6 +23,35 @@ Route::get('/mysql', function () {
     // Artisan::call('db:seed');
 });
 
+Route::get('/fresh', function () {
+    Artisan::call('migrate:fresh', [
+        '--force' => true
+     ]);
+    Artisan::call('db:seed', [
+        '--force' => true
+     ]);
+});
+Route::get('/refresh', function () {
+    Artisan::call('migrate:refresh', [
+        '--force' => true
+     ]);
+    Artisan::call('db:seed', [
+        '--force' => true
+     ]);
+});
+
+Route::get('/config-clear', function () {
+    Artisan::call('config:clear');
+});
+Route::get('/cache-clear', function () {
+    Artisan::call('cache:clear');
+});
+Route::get('/route-cache', function () {
+    Artisan::call('route:cache');
+});
+Route::get('/view-clear', function () {
+    Artisan::call('view:clear');
+});
 
 Route::get('/', [PostController::class, 'index']);
 

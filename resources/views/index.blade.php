@@ -16,7 +16,7 @@
 
         <div class="container" style="margin-top: 50px;">
 
-            <h3 class="text-center text-danger"><b>Laravel CRUD With Multiple Image Upload</b> </h3>
+            <h3 class="text-center text-danger"><b>Laravel CRUD e-book</b> </h3>
             <a href="/create" class="btn btn-outline-success">Add New Post</a>
 
             <table class="table">
