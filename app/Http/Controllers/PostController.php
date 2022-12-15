@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Google\Cloud\Storage\StorageClient;
+use Google\Cloud\Core\Exception\NotFoundException;
 
 class PostController extends Controller
 {
@@ -58,7 +59,7 @@ class PostController extends Controller
             ]);
            $post->save();
         }
-        
+
         $posts=Post::all();
             if($request->hasFile("images")){
                 
