@@ -32,6 +32,7 @@
   z-index: 600;
 }
 
+
 @media (max-width: 991.98px) {
   .sidebar {
     width: 100%;
