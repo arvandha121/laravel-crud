@@ -38,7 +38,7 @@
                          @csrf
                          @method('delete')
                          </form>
-                     <img src="/images/{{ $img->image }}" class="img-responsive" style="max-height: 100px; max-width: 100px;" alt="" srcset="">
+                     <img src="/images/{{ 'https://storage.googleapis.com/laravel-crud/'.$img->image }}" class="img-responsive" style="max-height: 100px; max-width: 100px;" alt="" srcset="">
                      @endforeach
                      @endif
 
