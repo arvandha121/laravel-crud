@@ -44,6 +44,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $posts=Post::all();
         if($request->hasFile("cover")){
             $file=$request->file("cover");
             $imageName=time().'_'.$file->getClientOriginalName();
@@ -57,7 +58,7 @@ class PostController extends Controller
             ]);
            $post->save();
         }
-
+        $posts=Post::all();
             if($request->hasFile("images")){
                 
                 //config with gcp
@@ -69,10 +70,10 @@ class PostController extends Controller
                 $bucket = $storage->bucket($storageBucketName);
 
                 //save storageBucketName
-                $fileSource = fopen(public_path('/storage/'.$savepath), 'r');
+                $fileSource = fopen(public_path('/storage/'.$posts), 'r');
                 $bucket->upload($fileSource, [
                     'predefinedAcl' => 'publicRead',
-                    'name' => $savepath
+                    'name' => $posts
                 ]);
 
                 $files=$request->file("images");
@@ -151,10 +152,10 @@ class PostController extends Controller
             $bucket = $storage->bucket($storageBucketName);
 
             //save storageBucketName
-            $fileSource = fopen(public_path('/storage/'.$savepath), 'r');
+            $fileSource = fopen(public_path('/storage/'.$post), 'r');
             $bucket->upload($fileSource, [
                 'predefinedAcl' => 'publicRead',
-                'name' => $savepath
+                'name' => $post
             ]);
 
             $files=$request->file("images");
@@ -180,6 +181,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
+        
+        $posts=Post::findOrFail($id);
+        
         //config with gcp
         $googleConfigFile = file_get_contents(config_path('googlecloud.json'));
         $storage = new StorageClient([
@@ -189,14 +193,12 @@ class PostController extends Controller
         $bucket = $storage->bucket($storageBucketName);
 
         //delete storageBucketName
-        $object = $bucket->object($image);
+        $object = $bucket->object($posts);
         $object->delete();
 
-         $posts=Post::findOrFail($id);
-
-         if (File::exists("cover/".$posts->cover)) {
-             File::delete("cover/".$posts->cover);
-         }
+        if (File::exists("cover/".$posts->cover)) {
+            File::delete("cover/".$posts->cover);
+        }
          $images=Image::where("post_id",$posts->id)->get();
          foreach($images as $image){
          if (File::exists("images/".$image->image)) {
