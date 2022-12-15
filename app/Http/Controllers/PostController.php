@@ -58,6 +58,7 @@ class PostController extends Controller
             ]);
            $post->save();
         }
+        
         $posts=Post::all();
             if($request->hasFile("images")){
                 
