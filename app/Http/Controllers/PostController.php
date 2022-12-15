@@ -19,6 +19,11 @@ class PostController extends Controller
         $posts=Post::all();
         return view('index')->with('posts',$posts);
     }
+    public function listview()
+    {
+        $posts=Post::all();
+        return view('listview')->with('posts',$posts);
+    }
 
     /**
      * Show the form for creating a new resource.

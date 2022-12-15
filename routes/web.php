@@ -54,6 +54,7 @@ Route::get('/view-clear', function () {
 });
 
 Route::get('/', [PostController::class, 'index']);
+Route::get('/list', [PostController::class, 'listview']);
 
 Route::get('/create', function () {
     return view('create');

@@ -10,7 +10,6 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
      <!-- Font-awesome -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-     <link rel="stylesheet" href="../css/sidebar.css">
      <style>
       body {
   background-color: #fbfbfb;
@@ -59,10 +58,10 @@
   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
-        <a href="/" class="list-group-item list-group-item-action py-2 ripple active" aria-current="true">
+        <a href="/" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
           <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span>
         </a>
-        <a href="/list" class="list-group-item list-group-item-action py-2 ripple">
+        <a href="/list" class="list-group-item list-group-item-action py-2 ripple active">
           <i class="fas fa-chart-area fa-fw me-3"></i><span>List Book</span>
         </a>
         {{-- <a href="#" class="list-group-item list-group-item-action py-2 ripple"
@@ -96,10 +95,47 @@
     </div>
   </nav>
   <!-- Sidebar -->
-  <div align="center" class="container" style="margin-top: 17rem">
-    <h1>
-      SELAMAT DATANG
-    </h1>
-  </div>
-</body>
+        <div class="container" style="margin-top: 50px; margin-left: 16rem">
+
+            <h3 class="text-center text-danger"><b>Laravel CRUD e-book</b> </h3>
+            <a href="/create" class="btn btn-primary mb-3">Add New Post</a>
+
+            <table class="table .table-responsive-lg table-bordered">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Description</th>
+                    <th>Cover</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+
+                    @foreach ($posts as $post)
+                 <tr>
+                       <th scope="row">{{ $post->id }}</th>
+                       <td>{{ $post->title }}</td>
+                       <td>{{ $post->author }}</td>
+                       <td>{{ $post->body }}</td>
+                       <td><img src="cover/{{ $post->cover }}" class="img-responsive" style="max-height:100px; max-width:100px" alt="" srcset=""></td>
+                       <td><a href="/edit/{{ $post->id }}" class="btn btn-warning">Update</a></td>
+                       <td>
+                           <form action="/delete/{{ $post->id }}" method="post">
+                            <button class="btn btn-danger" onclick="return confirm('Are you sure?');" type="submit">Delete</button>
+                            @csrf
+                            @method('delete')
+                        </form>
+                       </td>
+
+                   </tr>
+                   @endforeach
+
+                </tbody>
+              </table>
+        </div>
+    </body>
 </html>
