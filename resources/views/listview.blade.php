@@ -121,7 +121,7 @@
                        <td>{{ $post->title }}</td>
                        <td>{{ $post->author }}</td>
                        <td>{{ $post->body }}</td>
-                       <td><img src="cover/{{ 'https://storage.googleapis.com/laravel-crud/'.$post->cover }}" class="img-responsive" style="max-height:100px; max-width:100px" alt="" srcset=""></td>
+                       <td><img src="cover/{{ $post->cover }}" class="img-responsive" style="max-height:100px; max-width:100px" alt="" srcset=""></td>
                        <td><a href="/edit/{{ $post->id }}" class="btn btn-warning">Update</a></td>
                        <td>
                            <form action="/delete/{{ $post->id }}" method="post">

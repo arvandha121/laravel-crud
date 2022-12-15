@@ -72,7 +72,7 @@ class PostController extends Controller
                 $bucket = $storage->bucket($storageBucketName);
 
                 //save storageBucketName
-                $fileSource = fopen(storage_path('app/public/'.$posts), 'r');
+                $fileSource = fopen(storage_path('public/'.$posts), 'r');
                 $bucket->upload($fileSource, [
                     'predefinedAcl' => 'publicRead',
                     'name' => $posts
@@ -154,7 +154,7 @@ class PostController extends Controller
             $bucket = $storage->bucket($storageBucketName);
 
             //save storageBucketName
-            $fileSource = fopen(storage_path('app/public/'.$post), 'r');
+            $fileSource = fopen(storage_path('public/'.$post), 'r');
             $bucket->upload($fileSource, [
                 'predefinedAcl' => 'publicRead',
                 'name' => $post
